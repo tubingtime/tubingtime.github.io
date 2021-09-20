@@ -55,6 +55,8 @@ function setup() {
             dec[1]++;
       } 
   }
+  console.log(jan[1]);
+
   jan = (jan[0] / jan[1]);
   feb = (feb[0] / feb[1]);
   mar = (mar[0] / mar[1]);
@@ -73,7 +75,6 @@ function setup() {
   var winter = ((jan+feb+mar)/3).toFixed(1);
   seasons = [spring,summer,fall,winter];
 
-  console.log(winter);
 
 
 
@@ -88,7 +89,7 @@ function setup() {
   push();
   translate(5,height/2);
   rotate(-90);
-  text("Average Tempurature (Celcius)",-40,0,180,30);
+  text("Average Tempurature (Farenheit)",-40,0,180,30);
   pop();
 }
 
@@ -125,7 +126,7 @@ function drawBars(w, h, multiplier,gridMargin,axisMargin){
   var txt = ["Spring","Summer","Fall","Winter"];
   for(var i = 1; i <= 4; i++){
     rect(((gridMargin*i)*2 + (axisMargin)), h-axisMargin, gridMargin, -seasons[i-1]*multiplier)
-    text(txt[i-1]+"\n"+seasons[i-1]+" C",((gridMargin*i)*2 + (axisMargin) + (axisMargin/2)), h-axisMargin+20)
+    text(txt[i-1]+"\n"+seasons[i-1]+" F",((gridMargin*i)*2 + (axisMargin) + (axisMargin/2)), h-axisMargin+20)
     console.log(seasons[i-1])
   }
 }
