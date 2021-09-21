@@ -22,6 +22,9 @@ function takeTopx(year, x){
   return topx;
 }
 
+
+
+/* 
 function genBarRaceTable(){
   for (var year = 1; year < 22; year++){
     console.log(year);
@@ -40,7 +43,7 @@ function genBarRaceTable(){
       }
     }
   }
-}
+} */
 
 function homerunSort(a, b) {
   if (a[1] === b[1]) {
@@ -80,7 +83,10 @@ function processCSV(){
 }
 
 function canvasSetup(){
-  createCanvas(600, 600); // w, h
+  canvas = createCanvas(600, 600); // w, h
+  var x = (windowWidth - width) / 2;
+  var y = ((windowHeight - height) / 2)+60;
+  canvas.position(x, y);
   background("#ecf0f1");
   angleMode(DEGREES);
 
@@ -110,7 +116,7 @@ function drawchart(w, h, axisMargin, gridMargin, labelRatio){
     longest = w;
   }
   for(var i = gridMargin; i < longest; i+=gridMargin){ //draw grid
-    line(i,h-axisMargin,i,0); // vert line
+    //line(i,h-axisMargin,i,0); // vert line
     line(axisMargin,h-i,w,h-i);
     //console.log(i); 
   }
@@ -128,7 +134,7 @@ function drawchart(w, h, axisMargin, gridMargin, labelRatio){
 }
 
 function draw() {
-  if (time % 150 == 0){
+  if (time % 100 == 0){
     animationYear++;
     //console.log(animationYear);
     clear();
