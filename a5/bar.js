@@ -1,5 +1,5 @@
 d3.csv("weather.csv", function(d) {
-  if (d["Station.City"] == "San Francisco")
+  if (d["Station.City"] == "San Francisco" && d["Date.Year"] == "2016")
     return {
         city: d["Station.City"],
         avgTemp: +d["Data.Temperature.Avg Temp"] // can rename properties such as "land_area" instead of "land area" 
@@ -20,11 +20,6 @@ d3.csv("weather.csv", function(d) {
     {name : "Median", val : median},
     {name : "Max", val : max}
   ]
-  var testDataSet = [ 5, 10, 15, 20, 25, 30 ];
-  let sfTemps = [];
-  for (var i = 0; i < wdata.length; i++){
-    sfTemps[i] = wdata[i].avgTemp;
-  }
   console.log(pData);
 
   var w = 800;
@@ -39,33 +34,6 @@ d3.csv("weather.csv", function(d) {
           .attr("height", h);
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
-  
-//   function render(dataArray, color){
-
-//     // Bind data
-//     let rects = svg.selectAll("rect").data(dataArray);
-
-//     // Enter
-//     rects.enter().append("rect")
-//       .attr("y", 50)
-//       .attr("width",  30)
-// /*       .attr("height", pData.forEach(function(d){
-//         console.log(d)
-//         return d;
-//     })) */
-//       .attr("height", function(d){
-//         return d;
-//       })
-//       .attr("x", 55)
-//       .attr("fill", color);
-
-
-//   }
-//   render(pData, "red");
-
-  // max = 30;
-
-  var debug = ["Min","Median","Max"];
 
   function drawBars(dataset, barPadding){
   let xScale = d3.scaleBand()
@@ -89,7 +57,7 @@ d3.csv("weather.csv", function(d) {
     .append("rect");
 
   rects.attr("x", function(d) {
-    return xScale(d.name)+80; //not sure why i need + 80 here
+    return xScale(d.name)+80; //not sure why i need + 80 here (i think it has to do with barwidth func)
 })
     .attr("y", function(d){
       console.log(d.val)
@@ -99,8 +67,8 @@ d3.csv("weather.csv", function(d) {
     .attr("height",function(d){
       return innerHeight - yScale(d.val);
     })
-    .attr("width", innerWidth / dataset.length - barPadding)
-    .attr("fill","black")
+    .attr("width", innerWidth / dataset.length - barPadding) // this is problematic
+    .attr("fill","steelblue")
 }
   drawBars(pData, 100);
 
