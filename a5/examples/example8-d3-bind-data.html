@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>D3 Example</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>  
+  </head>
+  <body>
+
+    <script>
+      let scale = d3.scaleLinear()
+              .domain([1, 10])   // Data space
+              .range([0, 650]); // Pixel space
+
+      let svg = d3.select("body").append("svg")
+              .attr("width", 700)
+              .attr("height", 250);
+
+      function render(dataArray, color){
+
+        // Bind data
+        let rects = svg.selectAll("rect").data(dataArray);
+
+        // Enter
+        rects.enter().append("rect")
+          .attr("y", 50)
+          .attr("width",  20)
+          .attr("height", 20)
+          .attr("x", scale)
+          .attr("fill", color);
+
+        // Update 
+        rects
+          .attr("x", scale)
+          .attr("fill", color);
+
+      }
+
+      // SelectAll rectangles on line 23 selects all rectangles on the page and re-binds them to new data
+      render([1, 2, 3, 4, 5], "red");
+      render([2, 3.5, 4.5], "blue");
+
+
+    </script>
+
+  </body>
+</html>

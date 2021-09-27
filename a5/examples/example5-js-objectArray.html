@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JS Example</title>
+  </head>
+  <body>
+
+    <script>
+      var myArrayOfObjects = [
+        { x: 100, y: 100},
+        { x: 130, y: 120},
+        { x: 80 , y: 180},
+        { x: 180, y: 80, mpg: 34.2 },
+        { x: 180, y: 56, z:56 }
+      ];
+
+      myArrayOfObjects.forEach(function (d){
+        console.log(d.x + " and " + d.y);
+      });
+    </script>
+
+    This program has not graphical output. Check the console.log!
+  </body>
+</html>

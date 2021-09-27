@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 Example</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>  </head>
+  <body>
+
+    <script>
+
+      var dataArray = [1000, 2000, 3000, 4000, 5000, 6000, 7000];
+
+      // D3 Scales helps you convert from Data Space to Pixel Space 
+      var scale = d3.scaleLinear()
+        .domain([1000, 7000])   // Data space
+        .range([0, 900]); // Pixel space
+
+      var svg = d3.select("body").append("svg")
+        .attr("width",  1000)
+        .attr("height", 600);
+
+      svg.selectAll("rect")
+          .data(dataArray)
+        .enter().append("rect")
+          .attr("x", function (d){ return scale(d); })
+          // .attr("x", function (d){ return d; })
+          .attr("y", 50)
+          .attr("width",  75)
+          .attr("height", 75);
+
+    </script>
+
+  </body>
+</html>
