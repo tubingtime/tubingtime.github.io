@@ -24,7 +24,7 @@ d3.csv("weather.csv", function(d) {
 
   var w = 800;
   var h = 500;
-  const margin = { top : 0, bottom : 20, left : 50, right : 20}
+  const margin = { top : 0, bottom : 40, left : 30, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
@@ -57,7 +57,7 @@ d3.csv("weather.csv", function(d) {
     .append("rect");
 
   rects.attr("x", function(d) {
-    return xScale(d.name)+margin.left+margin.right+30; //not sure why i need + 30 here (i think it has to do with barwidth func )
+    return xScale(d.name)+80; //not sure why i need + 80 here (i think it has to do with barwidth func)
 })
     .attr("y", function(d){
       console.log(d.val)
@@ -71,9 +71,5 @@ d3.csv("weather.csv", function(d) {
     .attr("fill","steelblue")
 }
   drawBars(pData, 100);
-  var labelx = svg.append("text")
-                  .attr("transform", "translate(20,300)rotate(-90)" )
-                  .text("Temperature in Farenheit")
-
     
 });
