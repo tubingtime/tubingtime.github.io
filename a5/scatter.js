@@ -1,56 +1,83 @@
-var count = 0;
-let csvTable;
-let totalUsedSales = 0; //AVG
-function preload() {
-    csvTable = loadTable('video_games.csv','csv','header');
-}
-
-function setup() {
-  createCanvas(450, 450); // w, h
-  angleMode(DEGREES);
-  x = csvTable.getRowCount();
-  var year;
-  for (var i = 0; i < csvTable.getRowCount(); i++){
-      totalUsedSales += csvTable.getNum(i,"Metrics.Used Price");
-  }
-  totalUsedSales = (totalUsedSales/csvTable.getRowCount());
-  console.log(x);
-}
-
-function draw() {
-  background("#ecf0f1");
-  stroke('black');
-  fill(255);
-  rect(40,0,width-40,height-40);
-  stroke('grey');
-  for(var i =1; i < 10; i++){ //draw grid
-    line(40,(height-40)-50*i,width,(height-40)-50*i); //x1 y1 x2 y2
-    line((width+40)-50*i,0,(width+40)-50*i,height-40); //x1 y1 x2 y2
-  }
-
-  noStroke();
-  fill("black");
-  textSize(10);
-  textAlign(RIGHT);
-  for(var i =0; i < 10; i++){ //draw label
-    text(i*5, -82, (height-44)-i*50, 120, 60);
-  }
-  textAlign(CENTER);
-  text(totalUsedSales.toFixed(1)+"$", 56, totalUsedSales*10+41, 120, 60);
-  fill("#2980b9");
-  circle(114.5,(height-40)-(totalUsedSales*10),20);
-
-  for (var i = 0; i < 4; i++){
-  circle(114.5,((height-40)-(totalUsedSales*10)+i*50),20);
-  }
-  fill(0);
-  textSize(14);
-  //text("XLABEL", width/2-60, height-15, 120, 60);
-  text("2004-2008", 60, height-15, 120, 60);
+d3.csv("video_games.csv", function(d) {
+  return {
+      avgSales: +d["Metrics.Sales"],
+      avgUsedPrice: +d["Metrics.Used Price"] // can rename properties such as "land_area" instead of "land area" 
+};
+}).then(function(wdata) {
+  let minSales = (d3.min(wdata, function(d){
+    return d.avgSales;
+}))
+  let maxSales = (d3.max(wdata, function(d){
+      return d.avgSales;
+  }))
+  let maxUsed = (d3.max(wdata, function(d){
+      return d.avgUsedPrice;
+  }))
+  let minUsed = (d3.min(wdata, function(d){
+    return d.avgUsedPrice;
+}))
   
-  push();
-  translate(5,height/2);
-  rotate(-90);
-  text("Average Used Price ($)",-40,0,180,30);
-  pop();
+  
+
+  console.log(minUsed + " " + maxUsed);
+
+  var w = 800;
+  var h = 500;
+  const margin = { top : 0, bottom : 20, left : 30, right : 20}
+  const innerWidth = w - margin.left - margin.right;
+  const innerHeight = h - margin.top - margin.bottom;
+
+
+  let svg = d3.select("svg")
+          .attr("width", w)
+          .attr("height", h);
+  const g = svg.append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+  function drawScatter(dataset){
+    console.log(dataset);
+    let xScale = d3.scaleLinear()
+        .domain([minSales,maxSales])   // Data space
+        .range([2, innerWidth]); // Pixel space
+    let yScale = d3.scaleLinear()
+        .domain([minUsed, maxUsed])   // Data space
+        .range([innerHeight, 10]); // Pixel space
+
+    var xAxis = d3.axisBottom(xScale);
+      
+
+
+    var yAxis = d3.axisLeft(yScale);
+    g.append('g').call(d3.axisLeft(yScale));
+    let xAxisG = g.append('g').call(xAxis)
+      .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
+    
+      
+    
+    // g.append("text")
+    //      .attr("y", 20)
+    //      .text("top 10")
+    //      .fill("black")
+
+    // begin drawing of dots
+    //add svgs
+    let dots = svg.selectAll("circle")
+      .data(dataset)
+      .enter()
+      .append("circle");
+
+    //change svg attrs
+    dots
+        .attr("cx", function(d){ 
+          return xScale(d.avgSales)+margin.left;
+        })
+        .attr("cy", function(d){
+          return (yScale(d.avgUsedPrice))
+        })
+        .attr("r", 3)
+        .attr("fill","steelblue");
 }
+  drawScatter(wdata);
+
+    
+});
