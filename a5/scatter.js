@@ -23,7 +23,7 @@ d3.csv("video_games.csv", function(d) {
 
   var w = 800;
   var h = 500;
-  const margin = { top : 0, bottom : 20, left : 30, right : 20}
+  const margin = { top : 0, bottom : 50, left : 50, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
@@ -52,15 +52,13 @@ d3.csv("video_games.csv", function(d) {
     let xAxisG = g.append('g').call(xAxis)
       .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
     
-      
-    
-    // g.append("text")
-    //      .attr("y", 20)
-    //      .text("top 10")
-    //      .fill("black")
+
+
 
     // begin drawing of dots
     //add svgs
+
+
     let dots = svg.selectAll("circle")
       .data(dataset)
       .enter()
@@ -76,8 +74,17 @@ d3.csv("video_games.csv", function(d) {
         })
         .attr("r", 3)
         .attr("fill","steelblue");
+
+
 }
   drawScatter(wdata);
+  var labelx = svg.append("text")
+                  .text("Average Sales")
+                  .attr("x", innerWidth/2)
+                  .attr("y", innerHeight+40);
+  var labelx = svg.append("text")
+                  .attr("transform", "translate(20,250)rotate(-90)" )
+                  .text("Average used price")
 
     
 });
