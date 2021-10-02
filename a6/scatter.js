@@ -158,6 +158,12 @@ d3.csv("cars.csv", function(d) {
         .text(function(d){
           return d.label;
         });
+    
+    colorLabelG.append("text")
+          .style("font-size","13px")
+          .text("Size = Vehicle Height")
+          .attr("x",05)
+          .attr("y",120)
 
 
     
