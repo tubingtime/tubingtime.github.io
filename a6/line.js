@@ -1,16 +1,28 @@
 d3.csv("billionaires.csv", function(d) {
   return {
       year: +d["year"], 
-      name: d["name"], 
       wealth: +d["wealth.worth in billions"]
 };
 }).then(function(wdata) {
   let yearMinMax = (d3.extent(wdata, function(d){
     return d.year;
     }))
-  let wealthMinMax = (d3.extent(wdata, function(d){
+  let avgWealthArr = [];
+  let yearsArr = [1996,2001,2014]
+  for (let i = 0; i < 3; i++){
+    avgWealthArr[i] = {
+      year : yearsArr[i],
+      wealth : d3.sum(wdata, function(d){
+        if (d.year == yearsArr[i])
+        return d.wealth;
+      })
+    }
+  }
+  console.log(avgWealthArr);
+  let wealthMinMax = (d3.extent(avgWealthArr, function(d){
     return d.wealth;
     }))
+  
 
   
   
@@ -20,7 +32,7 @@ d3.csv("billionaires.csv", function(d) {
 
   var w = 800;
   var h = 500;
-  const margin = { top : 0, bottom : 50, left : 50, right : 20}
+  const margin = { top : 0, bottom : 50, left : 70, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
@@ -34,20 +46,19 @@ d3.csv("billionaires.csv", function(d) {
 
 
   function drawScatter(dataset){
-    console.log(dataset);
     let xScale = d3.scaleLinear()
-        .domain(yearMinMax)   // Data space
+        .domain([1994,2016])   // Data space
         .range([0, innerWidth]); // Pixel space 
     let yScale = d3.scaleLinear()
-        .domain(wealthMinMax)   // Data space
+        .domain([wealthMinMax[0]-500,wealthMinMax[1]+500])   // Data space
         .range([innerHeight, 4]); // Pixel space
 
-    var xAxis = d3.axisBottom(xScale);
+    var xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
       
 
 
     var yAxis = d3.axisLeft(yScale);
-    g.append('g').call(d3.axisLeft(yScale));
+    g.append('g').call(yAxis);
     let xAxisG = g.append('g').call(xAxis)
       .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
   
@@ -59,31 +70,43 @@ d3.csv("billionaires.csv", function(d) {
 
     //change svg attrs
     dots
-        .attr("cx", function(d){ 
-          return xScale(d.horsePower);
+        .attr("cx", function(d){
+          
+          return xScale(d.year);
         })
         .attr("cy", function(d){
-          return (yScale(d.mpg)) /* +variance(.3)) */
+          return yScale(d.wealth) /* +variance(.3)) */
         })
         .attr("r", function(d){
-          return (radiusScale(d.height)) /* +variance(.3)) */
+          return (2) /* +variance(.3)) */
         })
-        .attr("fill",function(d){
-          return d.driveline;
-        });
+        .attr("fill","black");
 
-      /* Make the points for the lines */
+    let line = d3.line();
+    let points = [
+      [0,100],
+      [500,100]
+    ]
+    g.append("path")
+     .datum(avgWealthArr)
+     .attr("fill","none")
+     .attr("stroke","steelblue")
+     .attr("stroke-width", 1.5)
+     .attr("d", d3.line()
+       .x(function(d){return xScale(d.year)})
+       .y(function(d){return yScale(d.wealth)})
+     )
 }
-  drawScatter(wdata);
+  drawScatter(avgWealthArr);
 
 
   var labelx = svg.append("text")
-                  .text("Horsepower")
-                  .attr("x", innerWidth/2)
+                  .text("Year")
+                  .attr("x", innerWidth/2+60)
                   .attr("y", innerHeight+40);
   var labelx = svg.append("text")
                   .attr("transform", "translate(20,250)rotate(-90)" )
-                  .text("Miles per galon")
+                  .text("Wealth in Billions")
 
     
 });
