@@ -30,9 +30,11 @@ d3.csv("billionaires.csv", function(d) {
   console.log(yearMinMax[0] + " " + yearMinMax[1]);
 
 
-  var w = 800;
+  var w = screen.width-10;
+  if (w > 800)
+    w = 800;
   var h = 500;
-  const margin = { top : 0, bottom : 50, left : 70, right : 20}
+  const margin = { top : 0, bottom : 50, left : 60, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
