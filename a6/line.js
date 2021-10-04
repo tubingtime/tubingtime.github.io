@@ -82,7 +82,7 @@ d3.csv("billionaires.csv", function(d) {
         .attr("r", function(d){
           return (2) /* +variance(.3)) */
         })
-        .attr("fill","black");
+        .attr("fill","steelblue");
 
     let line = d3.line();
     let points = [
