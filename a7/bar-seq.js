@@ -1,7 +1,7 @@
 d3.csv("weather.csv", function(d) {
   if (d["Station.City"] == "San Francisco" && d["Date.Year"] == "2016")
     return {
-        city: d["Station.City"],
+        month: d["Date.Full"],
         avgTemp: +d["Data.Temperature.Avg Temp"] // can rename properties such as "land_area" instead of "land area" 
   };
 }).then(function(wdata) {
@@ -36,14 +36,14 @@ d3.csv("weather.csv", function(d) {
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   function drawBars(dataset, barPadding){
-  let xScale = d3.scaleBand()
-      .domain(dataset.map(d => d.name))   // Data space
+  let xScale = d3.time.scale()
+      .domain([2016-01-03,])   // Data space
       .range([0, innerWidth]); // Pixel space
   let yScale = d3.scaleLinear()
       .domain([0, max])   // Data space
       .range([innerHeight, 0]); // Pixel space
 
-  var xAxis = d3.axisBottom(xScale);
+  var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m"))
 
   var yAxis = d3.axisLeft(yScale);
   g.append('g').call(d3.axisLeft(yScale));
@@ -56,21 +56,22 @@ d3.csv("weather.csv", function(d) {
     .enter()
     .append("rect");
 
-  rects.attr("x", function(d) {
-    return xScale(d.name)+margin.left+margin.right+30; //not sure why i need + 30 here (i think it has to do with barwidth func )
+  rects.attr("x", function(d, i) {
+
+    return xScale(d.month)+margin.left+5; //not sure why i need + 30 here (i think it has to do with barwidth func )
 })
     .attr("y", function(d){
-      console.log(d.val)
-      console.log(yScale(d.val))
-      return yScale(d.val)
+/*       console.log(d.avgTemp)
+      console.log(yScale(d.avgTemp)) */
+      return yScale(d.avgTemp)
     })
     .attr("height",function(d){
-      return innerHeight - yScale(d.val);
+      return innerHeight - yScale(d.avgTemp);
     })
-    .attr("width", innerWidth / dataset.length - barPadding) // this is problematic
+    .attr("width", 5) // this is problematic
     .attr("fill","steelblue")
 }
-  drawBars(pData, 100);
+  drawBars(wdata, 100);
   var labelx = svg.append("text")
                   .attr("transform", "translate(20,300)rotate(-90)" )
                   .text("Temperature in Farenheit")
