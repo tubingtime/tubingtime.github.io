@@ -1,7 +1,7 @@
 d3.csv("weather.csv", function(d) {
   if (d["Station.City"] == "San Francisco" && d["Date.Year"] == "2016")
     return {
-        month: d["Date.Full"],
+        month: d3.isoParse(d["Date.Full"]),
         avgTemp: +d["Data.Temperature.Avg Temp"] // can rename properties such as "land_area" instead of "land area" 
   };
 }).then(function(wdata) {
@@ -15,16 +15,16 @@ d3.csv("weather.csv", function(d) {
       return d.avgTemp;
   }))
   
-  let pData = [
-    {name : "Min", val : min},
-    {name : "Median", val : median},
-    {name : "Max", val : max}
-  ]
-  console.log(pData);
+  paddedExtent = [
+    d3.min(wdata.map(d => d.month)), 
+    d3.max(wdata.map(d => d.month))
+  ];
+  console.log(paddedExtent);
+
 
   var w = 800;
   var h = 500;
-  const margin = { top : 0, bottom : 20, left : 50, right : 20}
+  const margin = { top : 50, bottom : 20, left : 50, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
@@ -35,19 +35,27 @@ d3.csv("weather.csv", function(d) {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
+  let sequentialScale = d3.scaleSequential()
+    .domain([min,max])
+    .interpolator(d3.interpolateInferno);
   function drawBars(dataset, barPadding){
-  let xScale = d3.time.scale()
-      .domain([2016-01-03,])   // Data space
-      .range([0, innerWidth]); // Pixel space
+
+  let xTime = d3.scaleTime()
+    .domain(paddedExtent)
+    .rangeRound([0,innerWidth])
+  let xScale = d3.scaleBand()
+      .domain(dataset.map(d => d.month))   // Data space
+      .rangeRound([0,innerWidth]) // Pixel space
+      .padding(.1)
   let yScale = d3.scaleLinear()
       .domain([0, max])   // Data space
       .range([innerHeight, 0]); // Pixel space
 
-  var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m"))
 
+  var xAxis = d3.axisBottom(xTime);
   var yAxis = d3.axisLeft(yScale);
-  g.append('g').call(d3.axisLeft(yScale));
-  g.append('g').call(d3.axisBottom(xScale))
+  g.append('g').call(yAxis);
+  g.append('g').call(xAxis)
     .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
 
 
@@ -58,20 +66,41 @@ d3.csv("weather.csv", function(d) {
 
   rects.attr("x", function(d, i) {
 
-    return xScale(d.month)+margin.left+5; //not sure why i need + 30 here (i think it has to do with barwidth func )
+    return xScale(d.month)+margin.left; //not sure why i need + marginleft here (i think it has to do with barwidth func )
 })
     .attr("y", function(d){
 /*       console.log(d.avgTemp)
       console.log(yScale(d.avgTemp)) */
-      return yScale(d.avgTemp)
+      return yScale(d.avgTemp) + margin.top;
     })
     .attr("height",function(d){
       return innerHeight - yScale(d.avgTemp);
     })
-    .attr("width", 5) // this is problematic
-    .attr("fill","steelblue")
+    .attr("width", xScale.bandwidth()) // this is problematic
+    .attr("fill",function(d){
+      return sequentialScale(d.avgTemp);
+    })
+    .attr("date",function(d){
+      return d.month; /* for debugging */
+    })
+}
+
+function drawScale(){
+  svg.append("g")
+  .attr("class", "colorLegend")
+  .attr("transform", `translate(${innerWidth-150},00)`);
+  let colorLegend = d3.legendColor()
+    .shapeWidth(40)
+    .orient('horizontal')
+    .cells(5)
+    .scale(sequentialScale);
+  svg.select(".colorLegend")
+    .call(colorLegend);
+  
+  
 }
   drawBars(wdata, 100);
+  drawScale();
   var labelx = svg.append("text")
                   .attr("transform", "translate(20,300)rotate(-90)" )
                   .text("Temperature in Farenheit")
