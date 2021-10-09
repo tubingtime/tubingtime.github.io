@@ -39,8 +39,7 @@ d3.csv("weather.csv", function(d) {
     .interpolator(d3.interpolateRdBu);
 
 
-  function drawBars(dataset, barPadding){
-
+  function drawBars(dataset){
     let xTime = d3.scaleTime()
       .domain(paddedExtent)
       .rangeRound([0,innerWidth])
@@ -58,7 +57,10 @@ d3.csv("weather.csv", function(d) {
     g.append('g').call(xAxis)
       .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
     
-    /* Draw mean on axis */
+
+
+          /* Draw mean on axis */
+
     let points = [
       [0,yScale(mean)],
       [innerWidth,yScale(mean)]
@@ -67,35 +69,35 @@ d3.csv("weather.csv", function(d) {
     let line = d3.line();
     g.append("path")
       .attr("fill","none")
-      .attr("stroke","pink")
+      .attr("stroke","white")
       .attr("stroke-width", 1.5)
       .attr("d", line(points));
     
-    
-    /* BEGIN Drawing rects */
 
-    let rects = svg.selectAll("rect")
+
+    /* BEGIN Drawing bars */
+
+    let rects = g.selectAll("rect")
       .data(dataset)
       .enter()
       .append("rect");
-
     rects.attr("x", function(d, i) {
-
-      return xScale(d.month)+margin.left; //not sure why i need + marginleft here (i think it has to do with barwidth func )
-  })
-      .attr("y", function(d){
-        return yScale(d.avgTemp) + margin.top-1;
-      })
-      .attr("height",function(d){
-        return innerHeight - yScale(d.avgTemp);
-      })
-      .attr("width", xScale.bandwidth()) // this is problematic
-      .attr("fill",function(d){
-        return sequentialScale(d.avgTemp);
-      })
-      .attr("date",function(d){
-        return d.month; /* for debugging */
-      })
+          return xScale(d.month); //not sure why i need + marginleft here (i think it has to do with barwidth func )
+        })
+        .attr("y", function(d){
+          return yScale(d.avgTemp)-1;
+        })
+        .attr("height",function(d){
+          return innerHeight - yScale(d.avgTemp);
+        })
+        .attr("width", xScale.bandwidth()) // this is problematic
+        .attr("fill",function(d){
+          return sequentialScale(d.avgTemp);
+        })
+        .attr("date",function(d){
+          return d.month; /* for debugging */
+        })
+    
 }
 
 function drawScale(){
