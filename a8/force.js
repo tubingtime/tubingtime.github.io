@@ -1,29 +1,37 @@
-d3.csv("weather.csv", function(d) {
-  if (d["Station.City"] == "San Francisco" && d["Date.Year"] == "2016")
-    return {
-        month: d3.isoParse(d["Date.Full"]),
-        avgTemp: +d["Data.Temperature.Avg Temp"] // can rename properties such as "land_area" instead of "land area" 
-  };
-}).then(function(wdata) {
-  let min = (d3.min(wdata, function(d){
-      return d.avgTemp;
-  }))
-  let max = (d3.max(wdata, function(d){
-      return d.avgTemp;
-  }))
-  let median = (d3.median(wdata, function(d){
-      return d.avgTemp;
-  }))
+/* Following this example:
+https://observablehq.com/@d3/force-directed-graph
+&&
+https://flowingdata.com/2012/08/02/how-to-make-an-interactive-network-visualization/
+*/
+let nodeArr = []; let linkArr = [];
+
+d3.csv("soc-firm-hi-tech.csv", function(d, i) {
+  let src = d["source"];
+  let dest = d["destination"];
+
+  if (nodeArr[src] == null){
+    nodeArr[src] = {
+      id : src
+    }
+  }
+  if (nodeArr[dest] == null){
+    nodeArr[dest] = {
+      id : dest
+    }
+  }
+
+  linkArr[i] = {
+    source : src,
+    destination : dest
+  }
+
+}).then(function(d) {
   
-  paddedExtent = [
-    d3.min(wdata.map(d => d.month)), 
-    d3.max(wdata.map(d => d.month))
-  ];
-  console.log(paddedExtent);
+  console.log(nodeArr);
+  console.log(linkArr);
 
-
-  var w = 800;
-  var h = 500;
+  var w = 600;
+  var h = 600;
   const margin = { top : 50, bottom : 20, left : 50, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
@@ -35,75 +43,6 @@ d3.csv("weather.csv", function(d) {
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
-  let sequentialScale = d3.scaleSequential()
-    .domain([min,max])
-    .interpolator(d3.interpolateInferno);
-  function drawBars(dataset, barPadding){
-
-  let xTime = d3.scaleTime()
-    .domain(paddedExtent)
-    .rangeRound([0,innerWidth])
-  let xScale = d3.scaleBand()
-      .domain(dataset.map(d => d.month))   // Data space
-      .rangeRound([0,innerWidth]) // Pixel space
-      .padding(.1)
-  let yScale = d3.scaleLinear()
-      .domain([0, max])   // Data space
-      .range([innerHeight, 0]); // Pixel space
-
-
-  var xAxis = d3.axisBottom(xTime);
-  var yAxis = d3.axisLeft(yScale);
-  g.append('g').call(yAxis);
-  g.append('g').call(xAxis)
-    .attr('transform', `translate(0,${innerHeight})`); // move axis to bottom
-
-
-  let rects = svg.selectAll("rect")
-    .data(dataset)
-    .enter()
-    .append("rect");
-
-  rects.attr("x", function(d, i) {
-
-    return xScale(d.month)+margin.left; //not sure why i need + marginleft here (i think it has to do with barwidth func )
-})
-    .attr("y", function(d){
-/*       console.log(d.avgTemp)
-      console.log(yScale(d.avgTemp)) */
-      return yScale(d.avgTemp) + margin.top;
-    })
-    .attr("height",function(d){
-      return innerHeight - yScale(d.avgTemp);
-    })
-    .attr("width", xScale.bandwidth()) // this is problematic
-    .attr("fill",function(d){
-      return sequentialScale(d.avgTemp);
-    })
-    .attr("date",function(d){
-      return d.month; /* for debugging */
-    })
-}
-
-function drawScale(){
-  svg.append("g")
-  .attr("class", "colorLegend")
-  .attr("transform", `translate(${innerWidth-150},00)`);
-  let colorLegend = d3.legendColor()
-    .shapeWidth(40)
-    .orient('horizontal')
-    .cells(5)
-    .scale(sequentialScale);
-  svg.select(".colorLegend")
-    .call(colorLegend);
   
-  
-}
-  drawBars(wdata, 100);
-  drawScale();
-  var labelx = svg.append("text")
-                  .attr("transform", "translate(20,300)rotate(-90)" )
-                  .text("Temperature in Farenheit")
-
     
 });
