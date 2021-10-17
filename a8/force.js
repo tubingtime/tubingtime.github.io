@@ -7,26 +7,27 @@ let nodeArr = []; let linkArr = [];
 
 d3.csv("soc-firm-hi-tech.csv", function(d, i) {
   let src = d["source"];
-  let dest = d["destination"];
+  let target = d["destination"];
 
   /* Not sure how I would go about checking for duplicates using this javascript anon function stuff 
       I would need to access the data from the d array but idk how */
+      /* Another option would be to just get all the data into an array and then do some more processing later */
+  
 
-  if (nodeArr[src] == null){ 
-    nodeArr[src] = {
-      id : src
-    }
+  if (!(nodeArr.some(node => node.id == src))){ 
+    let node = {id : src};
+    nodeArr.push(node);
   }
-  if (nodeArr[dest] == null){ 
-    nodeArr[dest] = {
-      id : dest
-    }
+  if (!(nodeArr.some(node => node.id == target))){ 
+    let node = {id : target};
+    nodeArr.push(node);
   }
 
   linkArr[i] = {
     source : src,
-    destination : dest
+    target : target
   }
+
 
 }).then(function() {
   
@@ -50,7 +51,7 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
   /* Setup physics engine */
   let forceSim = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(node){
-      return node.id /* hmmm i dont think this will work */
+      return node.id;
     }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(w/2, h/2));
@@ -74,14 +75,27 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
     .attr("fill", "black");
 
   nodes.append("title")
-    .text(function(d){return d.id});
+    .text(function(node){return node.id});
+
   
-  /* Add nodes */
-  forceSimulation
-    .nodes(nodeArr)
-    .on("tick",ticked);
-  /* Add links */
-  
-  
-    
+  forceSim
+      .nodes(nodeArr)
+      .on("tick", ticked);
+
+  forceSim.force("link")
+      .links(linkArr);
+
+  function ticked() {
+    links
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    nodes
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+
+  return;
 });
