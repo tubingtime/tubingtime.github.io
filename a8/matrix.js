@@ -1,18 +1,13 @@
-/* Following this example:
-https://observablehq.com/@d3/force-directed-graph
-&&
-https://flowingdata.com/2012/08/02/how-to-make-an-interactive-network-visualization/
-*/
 let nodeArr = []; let linkArr = []; let adjMatrix = []
 
 d3.csv("soc-firm-hi-tech.csv", function(d, i) {
   let src = d["source"];
   let target = d["destination"];
 
-  /* Not sure how I would go about checking for duplicates using this javascript anon function stuff 
-      I would need to access the data from the d array but idk how */
-      /* Another option would be to just get all the data into an array and then do some more processing later */
-  
+  // Not sure how I would go about checking for duplicates using this javascript anon function stuff 
+  //     I would need to access the data from the d array but idk how
+        
+  // For now I will check for dupes my usual way
 
   if (!(nodeArr.some(node => node.id == src))){ 
     let node = {id : src};
@@ -33,22 +28,23 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
   
   console.log(nodeArr);
   let max = 0;
+  // find largest node (to determine size of array matrix)
   nodeArr.map(function(d){
     if (+d.id > max)
       max = d.id;
   })
   max++;
-  let adjMatrix = Array.from(Array(max), () => new Array(max))
+  let adjMatrix = Array.from(Array(max), () => new Array(max)) // create 2d array
 
-  linkArr.map(function(link){
+  linkArr.map(function(link){ 
     adjMatrix[link.source][link.target] = 1;
     adjMatrix[link.target][link.source] = 1;
   })
   // printAdjMatrix(adjMatrix);
 
-  var w = 600;
+  var w = 600; // right now needs to be at least 600 or else axis ticks start to overlap
   var h = 600;
-  const margin = { top : 50, bottom : 20, left : 50, right : 20}
+  const margin = { top : 30, bottom : 20, left : 30, right : 20}
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
 
@@ -66,7 +62,8 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
           .attr("height", h);
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
-  
+    
+  //set up axis
   var yAxis = d3.axisLeft(yScale).ticks(adjMatrix.length-1);
   var xAxis = d3.axisTop(xScale).ticks(adjMatrix.length-1);
   let squareLen = xScale(1); squareLen = squareLen/2;
@@ -76,7 +73,7 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
     .attr('transform', `translate(${squareLen},0)`);
   
   for(let row = 0; row < adjMatrix.length; row++){
-    let rectRow = g.selectAll("rect"+row)
+    let rectRow = g.selectAll("rect"+row) // if i set this to anything except "rect" it works, why?
       .data(adjMatrix[row])
       .enter()
       .append("rect");
@@ -118,12 +115,3 @@ function printAdjMatrix(arr){
   console.log(stringMatrix);
 }
 
-function drawAdjMatrix(){
-  xScale = d3.scaleLinear()
-    .domain([0, adjMatrix.length])
-    .range([0,innerWidth]);
-
-  yScale = d3.scaleLinear()
-    .domain([0, adjMatrix.length])
-    .range([innerHeight,0]);
-}
