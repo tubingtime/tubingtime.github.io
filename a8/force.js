@@ -97,5 +97,5 @@ d3.csv("soc-firm-hi-tech.csv", function(d, i) {
         .attr("cy", function(d) { return d.y; });
   }
 
-  return;
+
 });
