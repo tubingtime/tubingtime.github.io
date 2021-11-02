@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>MyPortfolio Bootstrap Template - Index</title>
+  <title>Miguel de Laveaga</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -34,7 +34,6 @@
 </head>
 
 <body>
-
   <!-- ======= Navbar ======= -->
   <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
     <div class="container py-2 py-md-5">
@@ -43,18 +42,9 @@
           <ul class="custom-menu">
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="about.html">About Me</a></li>
-            <li><a href="services.html">Services</a></li>
             <li><a href="works.html">Works</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
-        </div>
-        <div class="col-md-6 d-none d-md-block  mr-auto">
-          <div class="tweet d-flex">
-            <span class="bi bi-twitter text-white mt-2 mr-3"></span>
-            <div>
-              <p><em>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt ut officiis explicabo inventore. <br> <a href="#">t.co/v82jsk</a></em></p>
-            </div>
-          </div>
         </div>
         <div class="col-md-4 d-none d-md-block">
           <h3>Hire Me</h3>
@@ -67,7 +57,7 @@
 
   <nav class="navbar navbar-light custom-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">MyPortfolio.</a>
+      <a class="navbar-brand" href="index.html">Miguel de Laveaga</a>
       <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
         <span></span>
       </a>
@@ -81,16 +71,15 @@
       <div class="container">
         <div class="row mb-5 align-items-center">
           <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <h2>Hey, I'm Johan Stanworth</h2>
-            <p class="mb-0">Freelance Creative &amp; Professional Graphics Designer</p>
+            <h2>My Work</h2>
+            <!-- <p class="mb-0">Freelance Creative &amp; Professional Graphics Designer</p> -->
           </div>
           <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
             <div id="filters" class="filters">
               <a href="#" data-filter="*" class="active">All</a>
-              <a href="#" data-filter=".web">Web</a>
-              <a href="#" data-filter=".design">Design</a>
-              <a href="#" data-filter=".branding">Branding</a>
               <a href="#" data-filter=".photography">Photography</a>
+              <a href="#" data-filter=".video">Video</a>
+              <a href="#" data-filter=".branding">Commerical</a>
             </div>
           </div>
         </div>
@@ -153,141 +142,81 @@
       </div>
     </section><!-- End  Works Section -->
 
-    <!-- ======= Clients Section ======= -->
-    <section class="section">
+     <section class="section pb-5">
       <div class="container">
-        <div class="row justify-content-center text-center mb-4">
-          <div class="col-5">
-            <h3 class="h3 heading">My Clients</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
+
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-up">
+            <h2>Contact</h2>
+            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt ut
+              officiis explicabo inventore.
+            </p>
           </div>
+
         </div>
+
         <div class="row">
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-adobe.png" alt="Image" class="img-fluid"></a>
-          </div>
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-uber.png" alt="Image" class="img-fluid"></a>
-          </div>
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-apple.png" alt="Image" class="img-fluid"></a>
-          </div>
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-netflix.png" alt="Image" class="img-fluid"></a>
-          </div>
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-nike.png" alt="Image" class="img-fluid"></a>
-          </div>
-          <div class="col-4 col-sm-4 col-md-2">
-            <a href="#" class="client-logo"><img src="assets/img/logo-google.png" alt="Image" class="img-fluid"></a>
-          </div>
+          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
 
-        </div>
-      </div>
-    </section><!-- End Clients Section -->
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
 
-    <!-- ======= Services Section ======= -->
-    <section class="section services">
-      <div class="container">
-        <div class="row justify-content-center text-center mb-4">
-          <div class="col-5">
-            <h3 class="h3 heading">My Services</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
-          </div>
-        </div>
-        <div class="row">
+              <div class="row gy-3">
+                <div class="col-md-6 form-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="name">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="name">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="name">Message</label>
+                  <textarea class="form-control" name="message" cols="30" rows="10" required></textarea>
+                </div>
 
-          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-            <i class="bi bi-card-checklist"></i>
-            <h4 class="h4 mb-2">Web Design</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
-            <ul class="list-unstyled list-line">
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
-              <li>Non pariatur nisi</li>
-              <li>Magnam soluta quod</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Cumque quae aliquam</li>
-            </ul>
-          </div>
-          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-            <i class="bi bi-binoculars"></i>
-            <h4 class="h4 mb-2">Mobile Applications</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
-            <ul class="list-unstyled list-line">
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
-              <li>Non pariatur nisi</li>
-              <li>Magnam soluta quod</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Cumque quae aliquam</li>
-            </ul>
-          </div>
-          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-            <i class="bi bi-brightness-high"></i>
-            <h4 class="h4 mb-2">Graphic Design</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
-            <ul class="list-unstyled list-line">
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
-              <li>Non pariatur nisi</li>
-              <li>Magnam soluta quod</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Cumque quae aliquam</li>
-            </ul>
-          </div>
-          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-            <i class="bi bi-calendar4-week"></i>
-            <h4 class="h4 mb-2">SEO</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit explicabo inventore.</p>
-            <ul class="list-unstyled list-line">
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing</li>
-              <li>Non pariatur nisi</li>
-              <li>Magnam soluta quod</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Cumque quae aliquam</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Services Section -->
+                <div class="col-md-12 my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
 
-    <!-- ======= Testimonials Section ======= -->
-    <section class="section pt-0">
-      <div class="container">
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial">
-                  <img src="assets/img/person_1.jpg" alt="Image" class="img-fluid">
-                  <blockquote>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt ut officiis
-                      explicabo inventore.</p>
-                  </blockquote>
-                  <p>&mdash; Jean Hicks</p>
+                <div class="col-md-6 mt-0 form-group">
+                  <input type="submit" class="readmore d-block w-100" value="Send Message">
                 </div>
               </div>
-            </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial">
-                  <img src="assets/img/person_2.jpg" alt="Image" class="img-fluid">
-                  <blockquote>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt ut officiis
-                      explicabo inventore.</p>
-                  </blockquote>
-                  <p>&mdash; Chris Stanworth</p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+            </form>
 
           </div>
-          <div class="swiper-pagination"></div>
+
+          <div class="col-md-4 ml-auto order-2" data-aos="fade-up">
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <strong class="d-block mb-1">Address</strong>
+                <span>21 21 Fake St. Mountain View, San Francisco, California, USA</span>
+              </li>
+              <li class="mb-3">
+                <strong class="d-block mb-1">Phone</strong>
+                <span>+1 512 512 2121</span>
+              </li>
+              <li class="mb-3">
+                <strong class="d-block mb-1">Email</strong>
+                <span>mike@gmail.com</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+
+    </section>
+
+
 
   </main><!-- End #main -->
 
@@ -296,7 +225,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <p class="mb-1">&copy; Copyright MyPortfolio. All Rights Reserved</p>
+          <p class="mb-1">&copy; Copyright Miguel de Laveaga. All Rights Reserved</p>
           <div class="credits">
             <!--
             All the links in the footer should remain intact.
@@ -304,7 +233,7 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
           -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> &amp Thomas de Laveaga
           </div>
         </div>
         <div class="col-sm-6 social text-md-end">
