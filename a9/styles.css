@@ -25,12 +25,12 @@ body {
     background-color: #ecf0f1;
 }
 
-.links line {
-    stroke: #999;
-    stroke-opacity: .6;
+.axis--x path {
+    display: none;
 }
-
-.nodes circle {
-    stroke: #fff;
+  
+.line {
+    fill: none;
+    stroke: steelblue;
     stroke-width: 1.5px;
 }
