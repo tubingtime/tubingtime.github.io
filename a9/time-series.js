@@ -100,7 +100,6 @@ d3.tsv("data.tsv", function(d) {
             myLine.attr("visibility", "visible")
         }
 	    
-	    // Add code here for 'click' 
 	  }
 
 	  const xAxis = (g, x) => g
