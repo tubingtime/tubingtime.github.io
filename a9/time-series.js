@@ -89,6 +89,16 @@ d3.tsv("data.tsv", function(d) {
 	  }
 
 	  function click(elem) {
+                      
+        let myLineId = "path#" + elem.originalTarget.dataset.id;
+        let myLine = svg.select(myLineId);
+        console.log(myLine.attr("visibility"))
+        if (myLine.attr("visibility") == "visible"){
+            myLine.attr("visibility", "hidden");
+        }
+        else {
+            myLine.attr("visibility", "visible")
+        }
 	    
 	    // Add code here for 'click' 
 	  }
@@ -136,5 +146,8 @@ d3.tsv("data.tsv", function(d) {
 		  .attr("data-id", d => d.id.substring(0, 3).toUpperCase())
 	      .style("font", "10px sans-serif")
 	      .text(function(d) { return d.id; })
+          .on("click",function(d){click(d)})
 		  .on("mouseout", exit)
+
 })
+/*  */
