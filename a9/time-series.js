@@ -73,7 +73,21 @@ d3.tsv("data.tsv", function(d) {
 
 
 	  function hover(elem) {
-	     // Add code here for 'hover' 
+		let myLineId = "path#" + elem.originalTarget.dataset.id;
+        let myLine = svg.select(myLineId);
+		if (myLine.attr('visibility') == 'hidden') {
+			return;
+	   }
+
+        let paths = ["SAN","NEW","AUS"].filter(function(d){
+			return elem.originalTarget.dataset.id != d;
+		})
+		myLine.style("stroke","red");
+		for(let i = 0; i < paths.length; i++){
+			myLineId = "path#" + paths[i];
+			myLine = svg.select(myLineId)
+			myLine.style("stroke","grey");
+		}
 	  }
 
 	  function exit(elem) {
@@ -81,10 +95,10 @@ d3.tsv("data.tsv", function(d) {
 	     let id = attrs['data-id'].value;
 	     let path = city.select('#' + id);
 	     if (path.attr('visibility') == 'hidden') {
-	  	return;
+	  		return;
 	     }
 	     city.selectAll('.line').style('stroke', d => {
-	  	return z(d.id)
+	  		return z(d.id)
 	     });
 	  }
 
@@ -94,6 +108,7 @@ d3.tsv("data.tsv", function(d) {
         let myLine = svg.select(myLineId);
         console.log(myLine.attr("visibility"))
         if (myLine.attr("visibility") == "visible"){
+			exit(elem);
             myLine.attr("visibility", "hidden");
         }
         else {
@@ -146,6 +161,7 @@ d3.tsv("data.tsv", function(d) {
 	      .style("font", "10px sans-serif")
 	      .text(function(d) { return d.id; })
           .on("click",function(d){click(d)})
+		  .on("mouseover",function(d){hover(d)})
 		  .on("mouseout", exit)
 
 })
