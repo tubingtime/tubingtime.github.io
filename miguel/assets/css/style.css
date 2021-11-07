@@ -298,6 +298,27 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     transform: rotate(360deg);
   }
 }
+
+.yt-video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.yt-video-container::after {
+  display: block;
+  content: "";
+  padding-top: 56.25%;
+}
+
+.yt-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
