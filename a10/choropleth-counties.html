@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<title>A10 - Choropleth</title>
 <style>
 
 .counties {
@@ -23,16 +24,16 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-var unemployment = new Map();
+var graduates = new Map();
 
 var path = d3.geoPath();
 
 var x = d3.scaleLinear()
-    .domain([1, 10])
+    .domain([5, 45])
     .rangeRound([600, 860]);
 
 var color = d3.scaleThreshold()
-    .domain(d3.range(2, 10))
+    .domain([5,10,15,20,25,30,35,40,45])
     .range(d3.schemeBlues[9]);
 
 var g = svg.append("g")
@@ -59,7 +60,7 @@ g.append("text")
     .attr("fill", "#000")
     .attr("text-anchor", "start")
     .attr("font-weight", "bold")
-    .text("Unemployment rate");
+    .text("With Bachelor's degree or higher");
 
 g.call(d3.axisBottom(x)
     .tickSize(13)
@@ -70,7 +71,7 @@ g.call(d3.axisBottom(x)
 
 var promises = [
   d3.json("https://d3js.org/us-10m.v1.json"),
-  d3.tsv("data/unemployment.tsv", function(d) { unemployment.set(d.id, +d.rate); })
+  d3.csv("data/education.csv", function(d) { graduates.set(d.id, +d.rate); })
 ]
 
 Promise.all(promises).then(ready)
@@ -81,7 +82,7 @@ function ready([us]) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
-      .attr("fill", function(d) { return color(d.rate = unemployment.get(d.id)); })
+      .attr("fill", function(d) { return color(d.rate = graduates.get(d.id)); })
       .attr("d", path)
     .append("title")
       .text(function(d) { return d.rate + "%"; });
