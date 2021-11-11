@@ -36,6 +36,7 @@ var svg = d3.select("body").append("svg")
 queue()
     .defer(d3.json, "data/us-all.json")
     .defer(d3.json, "data/us-state-centroids.json")
+    .defer(d3.csv, "data/expensive-states.csv")
     .await(ready);
 
 function ready(error, us, centroid) {
