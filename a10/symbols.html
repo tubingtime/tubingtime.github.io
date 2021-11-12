@@ -24,8 +24,8 @@ var width = 960,
     height = 500;
 
 var radius = d3.scale.sqrt()
-    .domain([0, 1e6])
-    .range([0, 10]);
+    .domain([80, 180])
+    .range([2, 40]);
 
 var path = d3.geo.path();
 
@@ -35,23 +35,25 @@ var svg = d3.select("body").append("svg")
 
 queue()
     .defer(d3.json, "data/us-all.json")
-    .defer(d3.json, "data/us-state-centroids.json")
+    .defer(d3.json, "data/spliced.json")
     .defer(d3.csv, "data/expensive-states.csv")
     .await(ready);
 
 function ready(error, us, centroid) {
   if (error) throw error;
-
   svg.append("path")
       .attr("class", "states")
       .datum(topojson.feature(us, us.objects.states))
       .attr("d", path);
 
   svg.selectAll(".symbol")
-      .data(centroid.features.sort(function(a, b) { return b.properties.population - a.properties.population; }))
+      .data(centroid.features)
     .enter().append("path")
       .attr("class", "symbol")
-      .attr("d", path.pointRadius(function(d) { return radius(d.properties.population); }));
+      .attr("d", path.pointRadius(function(d) {
+        console.log(radius(d.properties.gradrate))
+        return radius(d.properties.gradrate); 
+       }))
 }
 
 </script>
