@@ -36,7 +36,6 @@ var svg = d3.select("body").append("svg")
 queue()
     .defer(d3.json, "data/us-all.json")
     .defer(d3.json, "data/spliced.json")
-    .defer(d3.csv, "data/expensive-states.csv")
     .await(ready);
 
 function ready(error, us, centroid) {
@@ -51,10 +50,13 @@ function ready(error, us, centroid) {
     .enter().append("path")
       .attr("class", "symbol")
       .attr("d", path.pointRadius(function(d) {
-        console.log(radius(d.properties.gradrate))
+        console.log(radius(d.properties.gradrate)) //gradrate should be renamed to cost
         return radius(d.properties.gradrate); 
        }))
 }
 
 </script>
+<h2>Bigger Circle = More expensive</h2>
+<h1><a href="https://github.com/tubingtime/tubingtime.github.io/blob/master/a10/symbols.html">View Code</a></h1>
+<h1><a href="https://github.com/tubingtime/tubingtime.github.io/blob/master/a10/data">View Data</a></h1>
 </body>
