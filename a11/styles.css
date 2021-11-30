@@ -34,3 +34,7 @@ body {
     stroke: rgb(201, 69, 69);
     stroke-width: 1.5px;
 }
+img {
+    width: 60%;
+    height: 60%;
+}

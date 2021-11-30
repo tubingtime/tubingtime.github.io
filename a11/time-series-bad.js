@@ -10,10 +10,10 @@ var x = d3.scaleLinear().range([0, width - margin.right]), //margin.right ?
 	y = d3.scaleLinear().range([height, 0]);
 
 
-const makeLine = (xScale) => d3.line()
+const makeLine = (yScale) => d3.line()
 	.curve(d3.curveBasis)
-	.x(function (d) { return xScale(d.year); })
-	.y(function (d) { return y(d.temperature); });
+	.x(function (d) { return x(d.year); })
+	.y(function (d) { return yScale(d.temperature); });
 
 var line = d3.line()
 	.curve(d3.curveBasis)
@@ -31,10 +31,11 @@ d3.csv("nasatemp.csv", function (d) {
 	}
 
 	let tempArray = data.map(function(d){return d.temperature});
+	let min = d3.min(tempArray), max = d3.max(tempArray);
 	x.domain(d3.extent(data, function (d) { return d.year; }));	
 	y.domain([
-		d3.min(tempArray),
-		d3.max(tempArray)
+		-40,
+		40
 	]);
 
 	const x_axis = g.append("g")
@@ -49,9 +50,10 @@ d3.csv("nasatemp.csv", function (d) {
 		.attr("y",32)
 		.text("Year")
 
-	g.append("g")
-		.attr("class", "axis axis--y")
-		.call(d3.axisLeft(y))
+	let y_axis = g.append("g")
+		.attr("class", "axis_y")
+		.call(d3.axisLeft(y));
+	y_axis
 		.append("text")
 		.attr("transform", "rotate(-90)")
 		.attr("y", 6)
@@ -59,12 +61,47 @@ d3.csv("nasatemp.csv", function (d) {
 		.attr("fill", "#000")
 		.text("Change in Global Temperature, ºC");
 
-	g.append("path")
-		.datum(data)
-		.attr("class", "line")
-		.attr("d", function (d) { console.log(d);return line(d); })
-		.attr("visibility", "visible")
+	let path = 	g.append("path")
+			.datum(data)
+			.attr("class", "line")
+			.attr("d", line(data))
+			.attr("visibility", "visible");
+	const yAxis = (g, y) => g
+	      .call(d3.axisLeft(y));
+	function zoomed(event) {
+		console.log(event);
+		var y2 = event.transform.rescaleY(y);
+		path.attr("d", function (d) {
+			return makeLine(y2)(d);
+			//const makeLine = (xScale) => d3.line()
+			//.curve(d3.curveBasis)
+			//.x(function(d) { return xScale(d.date); })
+			//.y(function(d) { return y(d.temperature); });
+		});
+		y_axis.call(yAxis, y2);
+	}
 
-	
+	const zoom = d3.zoom()
+		.scaleExtent([0, 5])
+		.extent([[margin.left, 0], [width - margin.right, height]])
+		.translateExtent([[margin.left, -Infinity], [width - margin.right, Infinity]])
+		.on("zoom", zoomed);
+
+	svg.call(zoom)
+		.transition()
+		.duration(100)
+		.call(zoom.scaleTo, 1, [y(Date.UTC(2012, 1, 1)), 0]); // ??
+/* 	y.domain([
+		min,
+		max
+	]);
+	y_axis
+		.transition()
+		.duration(8000)
+		.call(d3.axisLeft(y));
+	path
+		.transition()
+		.duration(8000)
+		.attr("d", line(data)) */
 })
 /*  */
