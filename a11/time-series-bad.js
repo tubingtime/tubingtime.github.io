@@ -89,7 +89,7 @@ d3.csv("nasatemp.csv", function (d) {
 			.call(zoom.scaleTo, 1, [y(Date.UTC(2012, 1, 1)), 0]);  */
 
 
-	let button = d3.select("body")
+	let button = d3.select("div")
 		.append("button")
 		.text("Change Y Axis")
 		.on("click",yAnimation);
