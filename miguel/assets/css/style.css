@@ -465,8 +465,32 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   left: 50%;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50% );
 }
 .social a:hover {
   color: #000;
+}
+
+
+/*--------------------------------------------------------------
+# Credits Box v0.1 by TJ
+--------------------------------------------------------------*/
+.credits-box {
+  text-align: center;
+  border-color: #fb4e16;
+  border-width: -5px;
+  border-bottom-width: 0px;
+  border-top-width: 0px;
+  border-style:solid;
+
+}
+.credits-box h2 {
+  color: rgb(255, 255, 255);
+  margin:1rem;
+  padding:1rem;
+}
+.credits-box span{
+  color: rgb(255, 255, 255);
+  margin:0.5rem;
+  padding:0.5rem;
 }
