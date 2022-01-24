@@ -373,6 +373,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .custom-navbar .navbar-brand {
   font-size: 1.7rem;
 }
+.navbar-brand {
+  margin-left: 1rem;
+}
 
 /* Burger */
 .burger {
@@ -380,6 +383,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   height: 32px;
   cursor: pointer;
   position: relative;
+  margin-right: 1rem;
 }
 
 .burger:before, .burger span, .burger:after {
