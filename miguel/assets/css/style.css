@@ -4,12 +4,11 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: Garamond;
+  font-family: 'EB Garamond', serif;
   color: #0d1e2d;
 }
 
@@ -23,7 +22,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: Garamond;
+  font-family: 'EB Garamond', serif;
   font-weight: bold;
 }
 
