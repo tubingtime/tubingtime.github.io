@@ -1,7 +1,7 @@
 Miguels website
 TODO:
     - [] fill out content
-    - [] optimize images
+    - [] optimize images (webp)
 
 
 ------------------------
