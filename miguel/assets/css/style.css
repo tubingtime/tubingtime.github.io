@@ -24,6 +24,7 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: Garamond;
+  font-weight: bold;
 }
 
 .section {
@@ -371,7 +372,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   }
 }
 .custom-navbar .navbar-brand {
-  font-size: 1.7rem;
+  font-size: 2.4rem;
 }
 .navbar-brand {
   margin-left: 1rem;
