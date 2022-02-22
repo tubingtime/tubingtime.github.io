@@ -375,6 +375,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 .navbar-brand {
   margin-left: 1rem;
+  font-style: italic;
+  font-weight: bold;
+  font-family: Garamond;
 }
 
 /* Burger */
