@@ -9,6 +9,7 @@
 --------------------------------------------------------------*/
 body {
   font-family: 'EB Garamond', serif;
+  font-size:1.15em;
   color: #0d1e2d;
 }
 
@@ -376,8 +377,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .navbar-brand {
   margin-left: 1rem;
   font-style: italic;
-  font-weight: bold;
-  font-family: Garamond;
+  font-weight: 800;
 }
 
 /* Burger */
@@ -476,6 +476,21 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 }
 .social a:hover {
   color: #000;
+}
+
+.mail {
+  font-size:larger;
+  text-align: center;
+}
+.mail:link{
+  color:black;
+}
+.mail:hover {
+  color:blueviolet;
+}
+.icon {
+  font-size:2rem;
+  line-height: 0;
 }
 
 

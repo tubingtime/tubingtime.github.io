@@ -14,7 +14,9 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -36,45 +38,7 @@
 <body>
 
   <!-- ======= Navbar ======= -->
-  <div class="collapse navbar-collapse custom-navmenu" id="main-navbar">
-    <div class="container py-2 py-md-5">
-      <div class="row align-items-start">
-        <div class="col-md-2">
-          <ul class="custom-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="works.html">Works</a></li>
-            <li class="active"><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="col-md-6 d-none d-md-block  mr-auto">
-          <div class="tweet d-flex">
-            <span class="bi bi-twitter text-white mt-2 mr-3"></span>
-            <div>
-              <p><em>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Quisquam necessitatibus incidunt ut officiis explicabo inventore. <br> <a href="#">t.co/v82jsk</a></em></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-none d-md-block">
-          <h3>Hire Me</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus 
-            incidunt ut officiisexplicabo inventore. <br> <a href="#">myemail@gmail.com</a></p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <nav class="navbar navbar-light custom-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">MyPortfolio.</a>
-      <a href="#" class="burger" data-bs-toggle="collapse" data-bs-target="#main-navbar">
-        <span></span>
-      </a>
-    </div>
-  </nav>
+  <script id="navbar_replacer" src="nav.js"></script> 
 
   <main id="main">
 
@@ -84,104 +48,36 @@
         <div class="row mb-5 align-items-end">
           <div class="col-md-6" data-aos="fade-up">
             <h2>Contact</h2>
-            <p class="mb-0">Miguel de Laveaga is a writer/director 
-              (“A New Covenant”, “Suenos de Panyebar”) and videographer based in New York City.
+            <p class="mb-0">Miguel de Laveaga is a writer/director (“A New Covenant”, “Suenos de Panyebar”) and videographer based in New York City.
               He has directed music videos for artists Cherin, Adie, christ! and Giulia.
               He has shot for brands spanning Gov Ball, Anne Klein, Airbnb and Maui Jim.
-              <br><br> Let's work together.
             </p>
+            <p><br>Let's work together.</p>
           </div>
-
+          <div class="row">
+            <div class="email-section" data-aos="fade-up">
+                  <a href="mailto:migueldelaveaga@gmail.com" class="mail">
+                    <span class="bi bi-envelope"> migueldelaveaga@gmail.com</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+  
+          </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-
-              <div class="row gy-3">
-                <div class="col-md-6 form-group">
-                  <label for="name">Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="name">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-                <div class="col-md-12 form-group">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" required>
-                </div>
-                <div class="col-md-12 form-group">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" cols="30" rows="10" required></textarea>
-                </div>
-
-                <div class="col-md-12 my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-
-                <div class="col-md-6 mt-0 form-group">
-                  <input type="submit" class="readmore d-block w-100" value="Send Message">
-                </div>
-              </div>
-
-            </form>
-
-          </div>
-
-          <div class="col-md-4 ml-auto order-2" data-aos="fade-up">
-            <ul class="list-unstyled">
-              <li class="mb-3">
-                <strong class="d-block mb-1">Address</strong>
-                <span>203 Fake St. Mountain View, San Francisco, California, USA</span>
-              </li>
-              <li class="mb-3">
-                <strong class="d-block mb-1">Phone</strong>
-                <span>+1 232 3235 324</span>
-              </li>
-              <li class="mb-3">
-                <strong class="d-block mb-1">Email</strong>
-                <span>youremail@domain.com</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
 
       </div>
 
     </section>
 
+
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="mb-1">&copy; Copyright MyPortfolio. All Rights Reserved</p>
-          <div class="credits">
-            <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
-          -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
-        </div>
-        <div class="col-sm-6 social text-md-end">
-          <a href="#"><span class="bi bi-twitter"></span></a>
-          <a href="#"><span class="bi bi-facebook"></span></a>
-          <a href="#"><span class="bi bi-instagram"></span></a>
-          <a href="#"><span class="bi bi-linkedin"></span></a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <script id="footer_replacer" src="footer.js"></script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
