@@ -1,6 +1,6 @@
 Miguels website
 TODO:
-    - [] optimize images (webp)
+    - [] optimize images (webp) working
 
 
 ------------------------
