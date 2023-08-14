@@ -1,3 +1,3 @@
-TJ's Homepage
+My Homepage
 
 Work in pogress.
