@@ -226,7 +226,7 @@ input, select, textarea {
 		transform: translate3d(0,0,0);
 	/* Set your background with this */
 
-		background: #161616 url("images/bg.jpg") bottom left;
+		background: #161616 url("images/bg-faded.jpg") bottom left;
 		background-repeat: repeat;
 		height: 100%;
 		left: 0;
