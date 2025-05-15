@@ -132,6 +132,13 @@ input, select, textarea {
 
 
 /* BG */
+	
+	#simple-bg {
+		background: #13182e;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+	}
 
 	#bg {
 		animation: bg 60s linear infinite;

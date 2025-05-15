@@ -1,26 +1,12 @@
-<script>
-    let { active } = $props();
-    let home = "inactive";
-    let services = "inactive"
-    let about = "inactive"
-
-    if (active == "home") {
-        home = "active"
-    }
-    else if (active == "services") {
-        services = "active"
-    }
-    else if (active == "about") {
-        about ="active"
-    }
-    else {
-        console.log("Invalid navbar item!")
-    }
-
-</script> 
-
-<div id="nav">
-	<a id={home} href="home">Home</a>
-	<a id={services} href="services">Services</a>
-	<a id={about} href="about">About</a>
-</div>
+<footer id="footer">
+    <div style="display:flex; flex-direction: column;">
+        <div>
+            <a href="mai&#108;to&#58;tj&#x40;th&#37;6F&#109;%61%73de&#37;6C&#97;&#118;&#101;&#37;61ga%2E%63&#111;m" class="nes-icon gmail is-medium"></a>
+            <a href="https://www.linkedin.com/in/thomas-de-laveaga-18a0851b0/" class="nes-icon linkedin is-medium"></a>
+            <a href=" https://github.com/tubingtime/" class="nes-icon github is-medium"></a>
+        </div>
+        <div>
+            <span class="copyright">&copy; Thomas de Laveaga. </span>
+        </div>
+    </div>
+</footer>
