@@ -1,8 +1,8 @@
 <script>
     let { active } = $props();
-    let home = "inactive";
-    let services = "inactive"
-    let about = "inactive"
+    let home = $state('inactive');
+    let services = $state('inactive');
+    let about = $state('inactive');
 
     if (active == "home") {
         home = "active"
