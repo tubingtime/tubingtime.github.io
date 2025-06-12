@@ -6,7 +6,7 @@
             <a aria-label="Github" href=" https://github.com/tubingtime/" class="nes-icon github is-medium"></a>
         </div>
         <div>
-            <span class="copyright">&copy; Thomas de Laveaga. </span>
+            <span class="copyright">&copy; Thomas de Laveaga </span>
         </div>
     </div>
 </footer>

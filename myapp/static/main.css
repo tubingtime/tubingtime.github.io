@@ -109,39 +109,15 @@ input, select, textarea {
 	.flex-row {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
-		padding-left: 5em;
-		padding-right: 5em;
 	}
+	
 /* Icon */
 
 	.icon {
-		text-decoration: none;
-		position: relative;
+		align-self: center;
+		margin-left: 1em;
+		
 	}
-
-		.icon:before {
-			display: inline-block;
-			font-style: normal;
-			font-variant: normal;
-			text-rendering: auto;
-			line-height: 1;
-			text-transform: none !important;
-			font-family: 'Font Awesome 5 Free';
-			font-weight: 400;
-		}
-
-		.icon > .label {
-			display: none;
-		}
-
-		.icon.solid:before {
-			font-weight: 900;
-		}
-
-		.icon.brands:before {
-			font-family: 'Font Awesome 5 Brands';
-		}
 
 
 
@@ -319,11 +295,10 @@ input, select, textarea {
 
 	section h1 {
 		font-family: 'Press Start 2P', 'Silkscreen', system-ui;
-		font-size: 3em;
+		font-size: 2.5em;
 		margin-top: 1em;
 		margin-bottom: .5em;
 		line-height: 1.2em;
-		text-align: start;
 	}
 
 	.start-row {
@@ -349,6 +324,44 @@ input, select, textarea {
 			flex-direction: column-reverse;
 		}
 	}
+
+	.center-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap:wrap;
+		justify-content: center;
+		gap: 2em;
+		margin-bottom: 3em;
+	}
+	
+	/* Services */
+
+	.service {
+		border: 5px white solid;
+		max-width: 650px;
+		min-height: 250px;
+		margin: auto;
+	}
+
+	.service h2 {
+		font-size: 1.2em;
+		padding: .5em;
+
+	}
+
+	.service p {
+		padding: .5em;
+		font-size: medium;
+		height: 100%;
+	}
+
+	.service-header {
+		padding-top: .7em;
+		padding-bottom: .7em;
+		border-bottom: 5px white solid;
+		gap: .5em;
+	}
+
 /* Footer */
 
 	#footer {

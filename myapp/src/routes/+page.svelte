@@ -9,15 +9,13 @@
 		<!-- Header -->
 		<header id="header">
 			<h1>Thomas de Laveaga</h1>
-			<p>Hi! My name is Thomas. <br>
+			<p>Hi! My name is Thomas.
 				<br>
-				I'm a freelance computer consultant.
-				<br>Use the links below to discover the services I offer.
+				<br>
+				I'm a freelance computer consultant and software engineer.
+				<br> Let's work together.
 			</p>
-			<section style="margin: 1em;">
-				<button type="button" class="nes-btn">Contact me</button>
 
-			</section>
 		</header>
 		<Footer />
 	</div>
