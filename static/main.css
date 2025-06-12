@@ -341,12 +341,12 @@ input, select, textarea {
 		max-width: 650px;
 		min-height: 250px;
 		margin: auto;
+		text-align: start;
 	}
 
 	.service h2 {
 		font-size: 1.2em;
 		padding: .5em;
-
 	}
 
 	.service p {
