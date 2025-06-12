@@ -11,3 +11,4 @@ declare global {
 }
 
 export {};
+export const prerender=true;
